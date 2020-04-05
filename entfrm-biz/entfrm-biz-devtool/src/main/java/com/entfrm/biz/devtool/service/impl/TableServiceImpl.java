@@ -135,10 +135,10 @@ public class TableServiceImpl extends ServiceImpl<TableMapper, Table> implements
                 // 查询字段类型
                 if (StrUtil.endWithIgnoreCase(columnName, "name")) {
                     column.setQueryType(GenConstants.QUERY_LIKE);
-                }
-
-                if (StrUtil.endWithIgnoreCase(columnName, "createTime")) {
+                }else if (StrUtil.endWithIgnoreCase(columnName, "createTime")) {
                     column.setQueryType(GenConstants.QUERY_BETWEEN);
+                }else {
+                    column.setQueryType(GenConstants.QUERY_EQ);
                 }
 
                 // 状态字段设置单选框
@@ -357,30 +357,32 @@ public class TableServiceImpl extends ServiceImpl<TableMapper, Table> implements
     private void generatorCode(String tableName, ZipOutputStream zip) {
         // 查询表信息
         Table table = baseMapper.selectOne(new QueryWrapper<Table>().eq("table_name", tableName));
-        // 查询列信息
-        List<Column> columns = columnService.list(new QueryWrapper<Column>().eq("table_id", table.getId()));
-        setPkColumn(table, columns);
-        table.setColumns(columns);
+        if(table != null){
+            // 查询列信息
+            List<Column> columns = columnService.list(new QueryWrapper<Column>().eq("table_id", table.getId()));
+            setPkColumn(table, columns);
+            table.setColumns(columns);
 
-        VelocityInitializer.initVelocity();
+            VelocityInitializer.initVelocity();
 
-        VelocityContext context = VelocityUtil.prepareContext(table);
+            VelocityContext context = VelocityUtil.prepareContext(table);
 
-        // 获取模板列表
-        List<String> templates = VelocityUtil.getTemplateList(table.getTplCategory());
-        for (String template : templates) {
-            // 渲染模板
-            StringWriter sw = new StringWriter();
-            Template tpl = Velocity.getTemplate(template, CommonConstants.UTF8);
-            tpl.merge(context, sw);
-            try {
-                // 添加到zip
-                zip.putNextEntry(new ZipEntry(VelocityUtil.getFileName(template, table)));
-                IoUtil.write(zip, CommonConstants.UTF8, false, sw.toString());
-                IoUtil.close(sw);
-                zip.closeEntry();
-            } catch (IOException e) {
-                log.error("渲染模板失败，表名：" + table.getTableName(), e);
+            // 获取模板列表
+            List<String> templates = VelocityUtil.getTemplateList(table.getTplCategory());
+            for (String template : templates) {
+                // 渲染模板
+                StringWriter sw = new StringWriter();
+                Template tpl = Velocity.getTemplate(template, CommonConstants.UTF8);
+                tpl.merge(context, sw);
+                try {
+                    // 添加到zip
+                    zip.putNextEntry(new ZipEntry(VelocityUtil.getFileName(template, table)));
+                    IoUtil.write(zip, CommonConstants.UTF8, false, sw.toString());
+                    IoUtil.close(sw);
+                    zip.closeEntry();
+                } catch (IOException e) {
+                    log.error("渲染模板失败，表名：" + table.getTableName(), e);
+                }
             }
         }
     }

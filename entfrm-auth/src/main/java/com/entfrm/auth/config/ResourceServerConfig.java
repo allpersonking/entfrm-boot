@@ -8,6 +8,7 @@ import org.springframework.security.config.annotation.method.configuration.Enabl
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.oauth2.config.annotation.web.configuration.EnableResourceServer;
 import org.springframework.security.oauth2.config.annotation.web.configuration.ResourceServerConfigurerAdapter;
+import org.springframework.web.servlet.config.annotation.InterceptorRegistry;
 import org.springframework.web.servlet.config.annotation.ResourceHandlerRegistry;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 
@@ -30,8 +31,8 @@ public class ResourceServerConfig extends ResourceServerConfigurerAdapter implem
                 .csrf().disable()
                 .authorizeRequests()
                 .antMatchers(
-                        "/oauth/**", "/common/**",
-                        "/actuator/**" ).permitAll()
+                        "/oauth/**", "/common/**", "/cms/article/doc/**", "/activiti/service/**","/activiti/task/track/**",
+                        "/activiti/process/resource", "/actuator/**" ).permitAll()
                 .anyRequest().authenticated()
                 .and().csrf().disable();
     }

@@ -1,8 +1,6 @@
 package com.entfrm.biz.devtool.entity;
 
 import cn.hutool.core.util.StrUtil;
-import com.baomidou.mybatisplus.annotation.TableField;
-import com.baomidou.mybatisplus.annotation.TableId;
 import com.baomidou.mybatisplus.annotation.TableName;
 import com.entfrm.core.data.entity.BaseEntity;
 import lombok.Data;
@@ -10,7 +8,6 @@ import lombok.EqualsAndHashCode;
 import lombok.experimental.Accessors;
 
 import javax.validation.constraints.NotBlank;
-import java.util.Map;
 
 /**
  * 代码生成业务字段表 dev_column
@@ -136,5 +133,13 @@ public class Column extends BaseEntity {
         } else {
             return this.columnComment;
         }
+    }
+
+    public String uJavaField() {
+        return StrUtil.upperFirst(this.javaField);
+    }
+
+    public String lJavaField() {
+        return StrUtil.toUnderlineCase(this.javaField);
     }
 }

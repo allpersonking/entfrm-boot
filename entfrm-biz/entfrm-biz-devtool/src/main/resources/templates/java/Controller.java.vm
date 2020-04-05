@@ -33,7 +33,17 @@ public class ${ClassName}Controller {
     private final ${ClassName}Service ${className}Service;
 
     private QueryWrapper<${ClassName}> getQueryWrapper(${ClassName} ${className}) {
-        return new QueryWrapper<${ClassName}>().orderByDesc("create_time");
+        return new QueryWrapper<${ClassName}>()
+#foreach ($column in $columns)
+    #if(${column.isQuery} == '1' && "createTime" != ${column.javaField} && "Integer" != ${column.javaType})
+        .${column.queryType}(StrUtil.isNotBlank(${className}.get${column.uJavaField()}()), "${column.lJavaField()}", ${className}.get${column.uJavaField()}())
+    #elseif(${column.isQuery} == '1' && "createTime" != ${column.javaField} && "Integer" == ${column.javaType})
+        .${column.queryType}(!StrUtil.isEmptyIfStr(${className}.get${column.uJavaField()}()), "${column.lJavaField()}", ${className}.get${column.uJavaField()}())
+    #elseif(${column.isQuery} == '1' && "createTime" == ${column.javaField} && ${column.queryType} == 'between')
+        .between(StrUtil.isNotBlank(${className}.getBeginTime()) && StrUtil.isNotBlank(${className}.getEndTime()), "create_time", ${className}.getBeginTime(), ${className}.getEndTime());
+    #end
+#end
+                .orderByDesc("create_time");
     }
 
     #if($table.tplCategory == 'tree')
@@ -64,6 +74,11 @@ public class ${ClassName}Controller {
             return R.ok(${className}Page.getRecords(), ${className}Page.getTotal());
         }
     #end
+
+    @GetMapping("/{id}")
+    public R getById(@PathVariable("id") Integer id) {
+        return R.ok(${className}Service.getById(id));
+    }
 
     @OperLog("${functionName}新增")
     @PreAuthorize("@ps.hasPerm('${permissionPrefix}_add')")
@@ -103,7 +118,7 @@ public class ${ClassName}Controller {
     #end
 
     @PreAuthorize("@ps.hasPerm('${permissionPrefix}_export')")
-    @PostMapping("/export")
+    @GetMapping("/export")
     @ResponseBody
     public R export(${ClassName} ${className}) {
         List<${ClassName}> list = ${className}Service.list(getQueryWrapper(${className}));

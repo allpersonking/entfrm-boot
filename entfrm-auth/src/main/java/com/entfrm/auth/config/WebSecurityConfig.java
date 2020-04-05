@@ -11,7 +11,6 @@ import org.springframework.security.config.annotation.web.configuration.EnableWe
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
-import org.springframework.web.servlet.config.annotation.InterceptorRegistry;
 
 /**
  * @author yong
@@ -44,6 +43,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
     /***设置不拦截规则*/
     @Override
     public void configure(WebSecurity web) {
-        web.ignoring().antMatchers("/static/**", "/druid/**", "/ip2region/**", "/processes", "/profile/**");
+        web.ignoring().antMatchers("/static/**", "/druid/**", "/ip2region/**", "/processes", "/profile/**", "/stencilset.json"
+                ,"/editor-app/**", "/modeler.html", "/favicon.ico");
     }
 }

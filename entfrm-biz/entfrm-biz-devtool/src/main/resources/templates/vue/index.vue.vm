@@ -170,7 +170,7 @@
     />
 
     <!-- 添加或修改${functionName}对话框 -->
-    <el-dialog :title="title" :visible.sync="open" width="500px">
+    <el-dialog :title="title" :visible.sync="open" width="600px">
       <el-form ref="form" :model="form" :rules="rules" label-width="80px">
 #foreach($column in $columns)
 #set($field=$column.javaField)
@@ -384,7 +384,6 @@ export default {
     /** 重置按钮操作 */
     resetQuery() {
       this.resetForm("queryForm");
-      this.handleQuery();
     },
     // 多选框选中数据
     handleSelectionChange(selection) {
@@ -460,7 +459,7 @@ export default {
         }).then(function() {
           return export${ClassName}(queryParams);
         }).then(response => {
-          this.download(response.msg);
+          this.download(response.data);
         }).catch(function() {});
     }
   }

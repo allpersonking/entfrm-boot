@@ -16,6 +16,7 @@
         <module>entfrm-biz-system</module>
         <module>entfrm-biz-devtool</module>
         <module>entfrm-biz-quartz</module>
+        <module>entfrm-biz-activiti</module>
     </modules>
 
 

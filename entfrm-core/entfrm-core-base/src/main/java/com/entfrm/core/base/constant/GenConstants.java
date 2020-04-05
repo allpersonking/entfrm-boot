@@ -137,13 +137,17 @@ public class GenConstants {
     public static final String TYPE_DATE = "Date";
 
     /**
+     * 等于查询
+     */
+    public static final String QUERY_EQ = "eq";
+
+    /**
      * 模糊查询
      */
     public static final String QUERY_LIKE = "like";
 
-
     /**
-     * 模糊查询
+     * 之间查询
      */
     public static final String QUERY_BETWEEN = "between";
 
