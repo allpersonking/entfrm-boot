@@ -1,7 +1,7 @@
 # entfrm-boot
 
 ### 平台简介    
-entfrm快速开发平台，是一个Web可视化开发平台，是一个集PC和APP快速开发、系统管理、运维监控、开发工具、OAuth2授权、可视化数据源管理与数据构建、API动态生成与统计、工作流、智能表单设计、微服务骨架等全方位功能于一体的高效、稳定的快速开发平台。
+entfrm快速开发平台，是一个以模块化为核心的无代码开发平台，是一个集PC和APP快速开发、系统管理、运维监控、开发工具、OAuth2授权、可视化数据源管理与数据构建、API动态生成与统计、工作流、智能表单设计、微服务骨架等全方位功能于一体的高效、稳定的快速开发平台。
 平台采用Spring Boot 2.X 、Spring Security、Oauth2、Mybatis Plus、 Flutter等核心技术，前端基于vue-element-admin框架。 演示地址：http://47.100.3.58/
 #### 参考项目：pig、ruoyi
 ###  entfrm官方交流群：871910881
@@ -86,20 +86,20 @@ entfrm-boot
 ### 演示效果
 <table>
     <tr>
-        <td><img src="http://47.100.3.58/static/img/login.png"/></td>
+        <td><img src="https://images.gitee.com/uploads/images/2020/0406/210829_fcd03ca7_5254955.png"/></td>
         <td><img src="http://47.100.3.58/static/img/home.png"/></td>
     </tr>
     <tr>
-        <td><img src="http://47.100.3.58/static/img/dept.png"/></td>
-        <td><img src="http://47.100.3.58/static/img/role.png"/></td>
+        <td><img src="https://images.gitee.com/uploads/images/2020/0406/210829_38b2fa1c_5254955.png"/></td>
+        <td><img src="https://images.gitee.com/uploads/images/2020/0406/210829_79f734d4_5254955.png"/></td>
     </tr>
     <tr>
-        <td><img src="http://47.100.3.58/static/img/user.png"/></td>
+        <td><img src="https://images.gitee.com/uploads/images/2020/0406/210829_7b9a44f6_5254955.png"/></td>
         <td><img src="http://47.100.3.58/static/img/menu.png"/></td>
     </tr>
 	<tr>
-        <td><img src="http://47.100.3.58/static/img/dict.png"/></td>
-        <td><img src="http://47.100.3.58/static/img/oauth.png"/></td>
+        <td><img src="https://images.gitee.com/uploads/images/2020/0406/210830_698bde7b_5254955.png"/></td>
+        <td><img src="https://images.gitee.com/uploads/images/2020/0406/210830_5cb7cf24_5254955.png"/></td>
     </tr>	 
     <tr>
         <td><img src="http://47.100.3.58/static/img/loginLog.png"/></td>
